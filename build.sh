@@ -50,3 +50,4 @@ curl -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendDocument?chat_id
 curl -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" -d "chat_id=${TELEGRAM_ID}&text=#Pacote_TigerOS_finalizado"           > /dev/null
 
 
+mv ${name}_${vers}_${arch}.deb instalador-de-AppImage.deb
