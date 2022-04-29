@@ -11,7 +11,7 @@ function solveLinks() {
     return
   }
 
-  echo "squashfs-root/${1}"
+  echo "squashfs-root/${1}" | sed 's|^squashfs-root/||g'
 }
 
 [ ! -f "${1}" ] && {
