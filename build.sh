@@ -22,7 +22,7 @@ cp "DEBIAN"/* pacote/DEBIAN
 cp src/* "pacote/usr/tigertools/"
 
 # Executaveis
-chmod +x pacote/usr/tigertools/AppImage-Installer.sh
+chmod +x pacote/usr/tigertools/*
 
 # Renomeia arquivos
 mv "pacote/DEBIAN/control.yaml" "pacote/DEBIAN/control"
