@@ -44,7 +44,7 @@ mv "${working_dir}/squashfs-root/${desktop}"      "${working_dir}/launcher.deskt
 
 rm -rf "${working_dir}/squashfs-root/" &> /dev/null
 
-echo "${offset}" > "${working_dir}/OFFSET"
+echo -n "${offset}" > "${working_dir}/OFFSET"
 
 version=$(cat "${working_dir}/launcher.desktop" | grep ^"X-AppImage-Version=" | cut -d= -f2 | head -n1)
 
@@ -53,7 +53,19 @@ version=$(cat "${working_dir}/launcher.desktop" | grep ^"X-AppImage-Version=" | 
   version="0.${version}"
 }
 
-echo "${version}" > "${working_dir}/VERSION"
+echo -n "${version}" > "${working_dir}/VERSION"
+
+name=$(grep   -A 10000 "\[Desktop Entry]" "${working_dir}/launcher.desktop" | grep -m1 ^"Name\[$(echo ${LANG} | cut -d. -f1)]=")
+
+[ -z "${name}" ] && {
+  name=$(grep -A 10000 "\[Desktop Entry]" "${working_dir}/launcher.desktop" | grep -m1 ^"Name=")
+}
+
+name=$(echo -n "${name}" | head -n1 | cut -d= -f2)
+
+echo -n "${name}" > "${working_dir}/NAME"
+
+echo -n "${appimage}" > "${working_dir}/PATH"
 
 echo -n "Directory with data: " > /dev/stderr
 echo "${working_dir}"
